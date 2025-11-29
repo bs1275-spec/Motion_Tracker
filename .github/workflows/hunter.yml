@@ -1,0 +1,29 @@
+name: MUTHUR Hunter (Daily Scan)
+
+on:
+  schedule:
+    # Run at 14:45 UTC (9:45 AM EST) every Mon-Fri
+    - cron: '45 14 * * 1-5'
+  workflow_dispatch: # Allows manual button click
+
+jobs:
+  scan_market:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas_datareader requests pandas
+
+      - name: Run Hunter
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python cloud_hunter.py
