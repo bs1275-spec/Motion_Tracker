@@ -8,7 +8,7 @@ import sys
 TICKER = "SOUN.US"
 # We read these from the Cloud's "Secret Vault" (Environment Variables)
 # If running locally for testing, we default to your values
-STOP_LOSS_PRICE = float(os.getenv("STOP_LOSS_PRICE", 11.50))
+STOP_LOSS_PRICE = float(os.getenv("STOP_LOSS_PRICE", 15.00))
 NTFY_TOPIC = os.getenv("NTFY_TOPIC", "muthur_flight_log_839_soun")
 
 print(f"--- ☁️ CLOUD SENTINEL STARTING ---")
