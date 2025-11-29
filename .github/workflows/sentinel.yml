@@ -27,6 +27,5 @@ jobs:
         env:
           # This connects the script to your GitHub Secrets
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
-          STOP_LOSS_PRICE: 11.50
         # 👇 CRITICAL UPDATE: Points to your new file
         run: python cloud_sentinel_soun.py
