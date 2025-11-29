@@ -24,6 +24,5 @@ jobs:
           pip install pandas_datareader requests pandas
 
       - name: Run Hunter
-        env:
-          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        # No 'env' section here anymore!
         run: python cloud_hunter.py
