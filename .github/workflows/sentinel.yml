@@ -1,0 +1,32 @@
+name: MUTHUR Cloud Sentinel (SOUN)
+
+on:
+  schedule:
+    # Run every 15 minutes, Monday to Friday (Market Hours)
+    - cron: '*/15 * * * 1-5'
+  workflow_dispatch: # Allows manual button click for testing
+
+jobs:
+  check_market:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas_datareader requests pandas
+
+      - name: Run Sentinel
+        env:
+          # This connects the script to your GitHub Secrets
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          STOP_LOSS_PRICE: 11.50
+        # 👇 CRITICAL UPDATE: Points to your new file
+        run: python cloud_sentinel_soun.py
